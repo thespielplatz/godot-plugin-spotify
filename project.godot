@@ -1,0 +1,43 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "HTTPRequest",
+"class": "SpotifyAuth",
+"language": "GDScript",
+"path": "res://addons/tsp-gp-spotify/SpotifyAuth.gd"
+}, {
+"base": "HTTPRequest",
+"class": "SpotifyPlayer",
+"language": "GDScript",
+"path": "res://addons/tsp-gp-spotify/SpotifyPlayer.gd"
+} ]
+_global_script_class_icons={
+"SpotifyAuth": "",
+"SpotifyPlayer": ""
+}
+
+[application]
+
+config/name="Godot Plugin Spotify"
+run/main_scene="res://Playground.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+Spotify="*res://addons/tsp-gp-spotify/Spotify.gd"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "tsp-gp-spotify" )
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
