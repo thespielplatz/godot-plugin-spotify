@@ -1,7 +1,7 @@
 # Spotify Plugin for Godot 3.x
 A godot plugin to control spotify
 
-I will implement the features of Google Firebase on the way, as I need them or they are requested by the community
+I will implement the features on the way, as I need them or they are requested by the community
 
 Did you use my code and and it worked without problems? You could ...<br>
 <a href='https://ko-fi.com/T6T31O7TS' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi1.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
