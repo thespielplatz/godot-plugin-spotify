@@ -32,7 +32,7 @@ WIP: https://patreon.com/
 2. Add Redirect URI in Spotify
 3. You need to configure the Spotify Plugin. The encryption_key is to save the access tokens of Spotify savely._
 
-'''
+```python
 var enrcyption_key = "SOME_STATIC_KEY_"
 {
 	 "client_id" : "",
@@ -41,14 +41,14 @@ var enrcyption_key = "SOME_STATIC_KEY_"
 }
 
 Spotify.configure(config, enrcyption_key)
-'''
+```
 
 4. If you start authenticating you need to tell, which scopes you wanna use: 
 	- Scopes: https://developer.spotify.com/documentation/general/guides/scopes/
-'''
+```python
 var scopes = ["user-read-playback-state", "user-modify-playback-state"]
 Spotify.Auth.authenticate_start(scopes)	
-'''
+```
 
 	- which triggers a _on_open_authentification_url signal
 
@@ -58,7 +58,7 @@ Check out the playground code
 ### Tips
 
 - if you messed up alot, clear the token
-'''
+```python
 Spotify.Auth._delete_token(client_id)
-'''
+```
 
