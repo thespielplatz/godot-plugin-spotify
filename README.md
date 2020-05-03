@@ -26,14 +26,19 @@ WIP: https://patreon.com/
 4. Activate the TSP GP Spotify
 5. From there, you will have an autoload singleton with the variables 
 
-## Configuration
+## Spotify App
 
-1. goto https://developer.spotify.com/ amd create new Spotify App
-2. Add Redirect URI in Spotify
-3. You need to configure the Spotify Plugin. The encryption_key is to save the access tokens of Spotify savely._
+1. Goto https://developer.spotify.com/ register
+2. At the Dashboard "CREATE A CLIENT ID"
+3. Save the ClientId and ClientSecret
+4. Goto your App and "Edit Settings"
+5. Add Redirect URI in Spotify --> you have to choose one
+
+## Configure the Plugin
+1. You need to configure the Spotify Plugin with the id, secret, url and an encrption key. The encryption_key is to save the access tokens of Spotify encrypted.
 
 ```python
-var enrcyption_key = "SOME_STATIC_KEY_"
+var enrcyption_key = "SOME_STATIC_KEY_IF_CHANGE_THAT_YOUR_TOKENS_WILL_BE_DELETE_AND_YOU_SHALL_NOT_PASS"
 {
 	 "client_id" : "",
 	 "client_secret" : "",
@@ -43,19 +48,30 @@ var enrcyption_key = "SOME_STATIC_KEY_"
 Spotify.configure(config, enrcyption_key)
 ```
 
-4. If you start authenticating you need to tell, which scopes you wanna use: 
+2. During authenticating you need to tell, which scopes you wanna use: 
 	- Scopes: https://developer.spotify.com/documentation/general/guides/scopes/
 ```python
 var scopes = ["user-read-playback-state", "user-modify-playback-state"]
 Spotify.Auth.authenticate_start(scopes)	
 ```
 
-	- which triggers a _on_open_authentification_url signal
+3. authenticate_start(scopes) triggers a _on_open_authentification_url(url) signal
+4. open the url in your browser
+5. accept or don't accept and shut down your computer
+6. the browser redirects to your redirect_uri and there is a code parameter in your url
+7. use the code to get the first access token
 
-### How To
+```python
+var code = "thecodeyoucopiedfromtheredirectedurlandyoushallpass"
+Spotify.Auth.authentication_code(code)
+```
+
+8. good to go ... I think ... or there is a bug ;)
+
+## How To
 Check out the playground code
 
-### Tips
+## Tips
 
 - if you messed up alot, clear the token
 ```python

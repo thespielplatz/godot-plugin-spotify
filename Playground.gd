@@ -11,6 +11,7 @@ func _ready():
 	#return
 	
 	Spotify.Auth.connect("open_authentification_url", self, "_on_open_authentification_url")
+	Spotify.Auth.connect("authentification_succeeded", self, "_on_authentification_succeeded")
 	Spotify.Auth.connect("authentification_response_error", self, "_on_spotify_auth_response_error")
 
 	Spotify.Player.connect("response_success", self, "_on_response_success")
@@ -25,7 +26,6 @@ func _on_Authorize_pressed():
 	Spotify.Auth.authenticate_start(scopes)	
 
 func _on_AuthorizeCode_pressed():
-	Spotify.Auth.connect("authentification_succeeded", self, "_on_authentification_succeeded")
 	Spotify.Auth.authentication_code($Code.text)
 
 func _on_open_authentification_url(url):
