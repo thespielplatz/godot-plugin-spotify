@@ -71,10 +71,36 @@ Spotify.Auth.authentication_code(code)
 ## How To
 Check out the playground code
 
-## Tips
+## Infos
 
 - if you messed up alot, clear the token
 ```python
 Spotify.Auth._delete_token(client_id)
+```
+
+- The Plugin is single HTTP based, this means as long as one command is executed, no other can be sent (and will be ignored). You can check the status with:
+```python
+func _on_GetCurrentTrack_pressed():
+	if !Spotify.is_busy():
+		Spotify.Player.get_current_playing_track()
+```
+
+- You sometimes you don't need the request data, you just fire the requests
+```python
+Spotify.Player.play()
+```
+
+- ... but if you want to have a toggle play/pause you need some info before. I created callbacks with funcref for that. Still not sure if this is the best solution
+```python
+func _on_PlayPause_pressed():
+	Spotify.Player.get_current_playback_information(funcref(self, "_on_playback_response"))
+
+func _on_playback_response(data):
+	print("Playback Info for Toggle")
+	if data.is_playing:
+		Spotify.Player.pause()
+	else:
+		Spotify.Player.play()
+
 ```
 

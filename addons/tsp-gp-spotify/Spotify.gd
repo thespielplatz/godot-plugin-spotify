@@ -2,17 +2,24 @@ extends Node
 
 var SpotifyAuth = preload("res://addons/tsp-gp-spotify/SpotifyAuth.gd")
 var SpotifyPlayer = preload("res://addons/tsp-gp-spotify/SpotifyPlayer.gd")
+var SpotifyRequest = preload("res://addons/tsp-gp-spotify/SpotifyRequest.gd")
 
 onready var Auth : SpotifyAuth = SpotifyAuth.new()
 onready var Player : SpotifyPlayer = SpotifyPlayer.new()
+onready var _spotify_request : SpotifyRequest = SpotifyRequest.new()
 
-#Note: If Web API returns status code 429, it means that you have sent too many requests. When this happens, check the Retry-After header, where you will see a number displayed. This is the number of seconds that you need to wait, before you try your request again.
+signal response_success(data)
+signal response_error(code, message)
 
 func _ready():
+	add_child(_spotify_request)
 	add_child(Auth)
-	add_child(Player)
 
-	Auth.connect("new_access_token", Player, "_on_new_access_token")
+	_spotify_request.connect("response_success", self, "_on_response_success")
+	_spotify_request.connect("response_error", self, "_on_response_error")
+	
+	Auth.connect("new_access_token", self, "_on_new_access_token")
+	Player._http = _spotify_request
 
 func configure(_config : Dictionary, encryption_key : String):
 	var config = {
@@ -27,3 +34,15 @@ func configure(_config : Dictionary, encryption_key : String):
 	
 	if Auth.is_authenticated():
 		Auth._refresh_token()
+		
+func is_busy()->bool:
+	return _spotify_request.get_http_client_status() != HTTPClient.STATUS_DISCONNECTED
+	
+func _on_new_access_token(access_token):
+	_spotify_request.access_token = access_token
+	
+func _on_response_success(data):
+	emit_signal("response_success", data)
+	
+func _on_response_error(code, message):
+	emit_signal("response_error", code, message)

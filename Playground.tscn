@@ -6,6 +6,9 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Authorize" type="Button" parent="."]
 margin_left = 51.0
@@ -42,6 +45,13 @@ margin_right = 96.0
 margin_bottom = 375.0
 text = "Play"
 
+[node name="PlayPause" type="Button" parent="."]
+margin_left = 59.0
+margin_top = 385.0
+margin_right = 140.0
+margin_bottom = 420.0
+text = "Play/Pause"
+
 [node name="Pause" type="Button" parent="."]
 margin_left = 106.0
 margin_top = 341.0
@@ -52,9 +62,16 @@ text = "Pause"
 [node name="Next" type="Button" parent="."]
 margin_left = 168.0
 margin_top = 342.0
-margin_right = 218.0
+margin_right = 210.0
 margin_bottom = 377.0
 text = "Next"
+
+[node name="V20" type="Button" parent="."]
+margin_left = 218.0
+margin_top = 342.0
+margin_right = 254.0
+margin_bottom = 377.0
+text = "V20"
 
 [node name="Code" type="TextEdit" parent="."]
 margin_left = 112.0
@@ -94,13 +111,15 @@ __meta__ = {
 
 [node name="Log" type="RichTextLabel" parent="."]
 margin_left = 290.0
-margin_top = 105.0
+margin_top = 104.0
 margin_right = 976.0
-margin_bottom = 514.0
+margin_bottom = 513.0
 [connection signal="pressed" from="Authorize" to="." method="_on_Authorize_pressed"]
 [connection signal="pressed" from="AuthorizeCode" to="." method="_on_AuthorizeCode_pressed"]
 [connection signal="pressed" from="GetCurrentPlaybackInformation" to="." method="_on_GetCurrentPlaybackInformation_pressed"]
 [connection signal="pressed" from="GetCurrentTrack" to="." method="_on_GetCurrentTrack_pressed"]
 [connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="PlayPause" to="." method="_on_PlayPause_pressed"]
 [connection signal="pressed" from="Pause" to="." method="_on_Pause_pressed"]
 [connection signal="pressed" from="Next" to="." method="_on_Next_pressed"]
+[connection signal="pressed" from="V20" to="." method="_on_V20_pressed"]

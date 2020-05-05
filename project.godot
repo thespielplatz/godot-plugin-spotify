@@ -14,14 +14,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/tsp-gp-spotify/SpotifyAuth.gd"
 }, {
-"base": "HTTPRequest",
+"base": "Node",
 "class": "SpotifyPlayer",
 "language": "GDScript",
 "path": "res://addons/tsp-gp-spotify/SpotifyPlayer.gd"
+}, {
+"base": "HTTPRequest",
+"class": "SpotifyRequest",
+"language": "GDScript",
+"path": "res://addons/tsp-gp-spotify/SpotifyRequest.gd"
 } ]
 _global_script_class_icons={
 "SpotifyAuth": "",
-"SpotifyPlayer": ""
+"SpotifyPlayer": "",
+"SpotifyRequest": ""
 }
 
 [application]

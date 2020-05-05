@@ -14,7 +14,7 @@ func _ready():
 	Spotify.Auth.connect("authentification_succeeded", self, "_on_authentification_succeeded")
 	Spotify.Auth.connect("authentification_response_error", self, "_on_spotify_auth_response_error")
 
-	Spotify.Player.connect("response_success", self, "_on_response_success")
+	Spotify.connect("response_success", self, "_on_response_success")
 
 	Spotify.configure(config, "StoreItSave!")
 	
@@ -38,7 +38,7 @@ func _on_authentification_succeeded():
 func _on_spotify_auth_response_error(code, message):
 	print_debug(str(code) + " " + message)
 
-func _loadConfigFromJSON():
+func _loadConfigFromJSON():	
 	var file = File.new()
 	var err = file.open("res://spotify-config.json", file.READ)
 	if err != OK:
@@ -62,7 +62,8 @@ func _on_GetCurrentPlaybackInformation_pressed():
 	Spotify.Player.get_current_playback_information()
 
 func _on_GetCurrentTrack_pressed():
-	Spotify.Player.get_current_playing_track()
+	if !Spotify.is_busy():
+		Spotify.Player.get_current_playing_track()
 	
 func _on_Play_pressed():
 	Spotify.Player.play()
@@ -70,6 +71,18 @@ func _on_Play_pressed():
 func _on_Pause_pressed():
 	Spotify.Player.pause()
 
-
 func _on_Next_pressed():
 	Spotify.Player.next()
+
+func _on_V20_pressed():
+	Spotify.Player.set_volume(10)
+
+func _on_PlayPause_pressed():
+	Spotify.Player.get_current_playback_information(funcref(self, "_on_playback_response"))
+
+func _on_playback_response(data):
+	print("Playback Info for Toggle")
+	if data.is_playing:
+		Spotify.Player.pause()
+	else:
+		Spotify.Player.play()
