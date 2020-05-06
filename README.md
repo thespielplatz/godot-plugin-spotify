@@ -76,14 +76,14 @@ Check out the playground code
 ## Signals
 
 ####  Spotify has three signals:
+
 The Request was a success
 ```python
 signal response_success(data)
-```python
+
 There was an error with the underlying http request
-```
-signal response_error(code, message)
 ```python
+signal response_error(code, message)
 ```
 The Spotify Web API states an error. e.g. NO_ACTIVE_PLAYER --> this causes an 404 Response
 ```python
