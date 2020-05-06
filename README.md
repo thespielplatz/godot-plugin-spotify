@@ -15,7 +15,7 @@ WIP: https://patreon.com/
 	- Get Current Track
 	- Play
 	- Pause
-	- Next
+	- Nextsp
 	- Set Volume
 	- Get a User's Available Devices
 	- Transfer a User's Playback
@@ -73,9 +73,40 @@ Spotify.Auth.authentication_code(code)
 ## How To
 Check out the playground code
 
-## Infos
+## Signals
 
-- If you export your project you should move your .json into a TextFile Ressource, because the .json file doesn't show up in the resource folder
+####  Spotify has three signals:
+The Request was a success
+```python
+signal response_success(data)
+```python
+There was an error with the underlying http request
+```
+signal response_error(code, message)
+```python
+```
+The Spotify Web API states an error. e.g. NO_ACTIVE_PLAYER --> this causes an 404 Response
+```python
+signal spotify_error(code, message, reason)
+```
+
+- The Spotify Plugin has three signals:
+
+#### Spotify.Auth
+Give the Spotify App access to your spotify account
+```python
+signal open_authentification_url(url)
+```
+
+Successfully Authenticated the app
+```python
+signal authentification_succeeded(auth)
+```
+
+There was an error (http request or spotify api)
+```python
+signal authentification_response_error(code, message)
+```
 
 - if you messed up alot, clear the token
 ```python

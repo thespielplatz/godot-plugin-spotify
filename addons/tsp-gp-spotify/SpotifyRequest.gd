@@ -3,6 +3,7 @@ class_name SpotifyRequest
 
 signal response_success(data)
 signal response_error(code, message)
+signal spotify_error(code, message, reason)
 
 var access_token : String
 
@@ -59,6 +60,12 @@ func _on_request_completed(result, response_code, headers, body):
 		return
 	
 	var res = json_result.result
+	
+	if res.has("error"):
+		emit_signal("spotify_error", res.error.status, res.error.message, res.error.reason)
+		_last_request = null
+		_callback = null
+		return
 	
 	# See: https://developer.spotify.com/documentation/web-api/
 	if response_code >= HTTPClient.RESPONSE_OK && response_code < HTTPClient.RESPONSE_MULTIPLE_CHOICES: 

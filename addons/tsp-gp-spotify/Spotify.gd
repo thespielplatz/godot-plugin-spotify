@@ -10,6 +10,7 @@ onready var _spotify_request : SpotifyRequest = SpotifyRequest.new()
 
 signal response_success(data)
 signal response_error(code, message)
+signal spotify_error(code, message, reason)
 
 func _ready():
 	add_child(_spotify_request)
@@ -17,6 +18,7 @@ func _ready():
 
 	_spotify_request.connect("response_success", self, "_on_response_success")
 	_spotify_request.connect("response_error", self, "_on_response_error")
+	_spotify_request.connect("spotify_error", self, "_on_spotify_error")
 	
 	Auth.connect("new_access_token", self, "_on_new_access_token")
 	Player._http = _spotify_request
@@ -46,3 +48,6 @@ func _on_response_success(data):
 	
 func _on_response_error(code, message):
 	emit_signal("response_error", code, message)
+	
+func _on_spotify_error(code, message, reason):
+	emit_signal("spotify_error", code, message, reason)

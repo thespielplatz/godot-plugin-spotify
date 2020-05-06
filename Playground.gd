@@ -18,6 +18,8 @@ func _ready():
 	Spotify.Auth.connect("authentification_response_error", self, "_on_spotify_auth_response_error")
 
 	Spotify.connect("response_success", self, "_on_response_success")
+	Spotify.connect("response_error", self, "_on_response_error")
+	Spotify.connect("spotify_error", self, "_on_spotify_error")
 
 	Spotify.configure(config, "StoreItSave!")
 	
@@ -66,6 +68,15 @@ func _loadConfigFromJSON():
 func _on_response_success(data):
 	print("Response Success")
 	$Log.text = JSON.print(data)
+	
+func _on_response_error(response_code, body_string):
+	print("Response Errror " + str(response_code))
+	print(body_string)
+	$Log.text = body_string
+	
+func _on_spotify_error(code, message, reason):
+	print("Spotify Errror " + str(code) + " " + message + " " + reason)
+	$Log.text = message + "\n" + reason
 
 func _on_GetCurrentPlaybackInformation_pressed():
 	Spotify.Player.get_current_playback_information()
