@@ -85,13 +85,12 @@ signal response_success(data)
 There was an error with the underlying http request
 ```python
 signal response_error(code, message)
+
 ```
 The Spotify Web API states an error. e.g. NO_ACTIVE_PLAYER --> this causes an 404 Response
 ```python
 signal spotify_error(code, message, reason)
 ```
-
-- The Spotify Plugin has three signals:
 
 #### Spotify.Auth
 Give the Spotify App access to your spotify account
@@ -103,7 +102,6 @@ Successfully Authenticated the app
 ```python
 signal authentification_succeeded(auth)
 ```
-
 There was an error (http request or spotify api)
 ```python
 signal authentification_response_error(code, message)
