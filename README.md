@@ -107,6 +107,8 @@ There was an error (http request or spotify api)
 signal authentification_response_error(code, message)
 ```
 
+## Infos, Tips & Tricks
+
 - if you messed up alot, clear the token
 ```python
 Spotify.Auth._delete_token(client_id)
@@ -115,7 +117,7 @@ Spotify.Auth._delete_token(client_id)
 - The Plugin is single HTTP based, this means as long as one command is executed, no other can be sent (and will be ignored). You can check the status with:
 ```python
 func _on_GetCurrentTrack_pressed():
-	if !Spotify.is_busy():
+	if not Spotify.is_busy():
 		Spotify.Player.get_current_playing_track()
 ```
 
