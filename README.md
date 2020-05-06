@@ -17,6 +17,8 @@ WIP: https://patreon.com/
 	- Pause
 	- Next
 	- Set Volume
+	- Get a User's Available Devices
+	- Transfer a User's Playback
 
 ## Install
 

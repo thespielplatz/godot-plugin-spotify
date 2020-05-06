@@ -47,10 +47,17 @@ text = "Play"
 
 [node name="PlayPause" type="Button" parent="."]
 margin_left = 59.0
-margin_top = 385.0
+margin_top = 384.0
 margin_right = 140.0
-margin_bottom = 420.0
+margin_bottom = 419.0
 text = "Play/Pause"
+
+[node name="TestButton" type="Button" parent="."]
+margin_left = 50.0
+margin_top = 526.0
+margin_right = 131.0
+margin_bottom = 561.0
+text = "TestButton"
 
 [node name="Pause" type="Button" parent="."]
 margin_left = 106.0
@@ -120,6 +127,7 @@ margin_bottom = 513.0
 [connection signal="pressed" from="GetCurrentTrack" to="." method="_on_GetCurrentTrack_pressed"]
 [connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="PlayPause" to="." method="_on_PlayPause_pressed"]
+[connection signal="pressed" from="TestButton" to="." method="_on_TestButton_pressed"]
 [connection signal="pressed" from="Pause" to="." method="_on_Pause_pressed"]
 [connection signal="pressed" from="Next" to="." method="_on_Next_pressed"]
 [connection signal="pressed" from="V20" to="." method="_on_V20_pressed"]

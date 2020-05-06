@@ -2,6 +2,9 @@ extends Panel
 
 var config
 
+var deviceMac
+var deviceBox
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_loadConfigFromJSON()
@@ -51,6 +54,12 @@ func _loadConfigFromJSON():
 
 	var json_string = file.get_as_text()
 	config = parse_json(json_string)
+	
+	if config.has("deviceMac"):
+		deviceMac = config.deviceMac
+	if config.has("deviceBox"):
+		deviceBox = config.deviceBox
+	
 	print("Loaded Spotify Config")
 	print(config)
 
@@ -86,3 +95,12 @@ func _on_playback_response(data):
 		Spotify.Player.pause()
 	else:
 		Spotify.Player.play()
+
+
+func _on_TestButton_pressed():
+	#Spotify.Player.get_devices(funcref(self, "_on_data_callback"))
+	Spotify.Player.transfer_playback(deviceBox, true)
+
+func _on_data_callback(data):
+	print("Datacallback")
+	print(data)

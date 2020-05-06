@@ -3,6 +3,8 @@ class_name SpotifyPlayer
 
 var _http : SpotifyRequest
 
+const url_get_devices = "https://api.spotify.com/v1/me/player/devices"
+const url_transfer_playback = "https://api.spotify.com/v1/me/player"
 const url_get_current_playing_track = "https://api.spotify.com/v1/me/player/currently-playing"
 const url_get_current_playback_information = "https://api.spotify.com/v1/me/player"
 const url_play = "https://api.spotify.com/v1/me/player/play"
@@ -12,6 +14,15 @@ const url_set_volume = "https://api.spotify.com/v1/me/player/volume"
 
 func _ready():
 	pass
+
+func get_devices(callback : FuncRef = null):
+	_http.send_request(url_get_devices, HTTPClient.METHOD_GET, {}, callback)
+
+func transfer_playback(deviceId : String, play : bool, callback : FuncRef = null):
+	_http.send_request(url_transfer_playback, HTTPClient.METHOD_PUT, { 
+		"device_ids" : [deviceId],
+		"play" : play
+	}, callback)
 
 func get_current_playback_information(callback : FuncRef = null):
 	_http.send_request(url_get_current_playback_information, HTTPClient.METHOD_GET, {}, callback)

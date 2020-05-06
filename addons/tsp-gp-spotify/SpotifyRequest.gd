@@ -15,9 +15,12 @@ func _ready():
 	pass # Replace with function body.
 
 func send_request(url, method, fields := {}, callback : FuncRef = null):
-	var query_string = _http_helper.query_string_from_dict(fields)
-	var headers = ["Authorization: Bearer " + access_token, "Content-Type: application/x-www-form-urlencoded", "Content-Length: " + str(query_string.length())]
-	var status = request(url, headers, true, method, query_string)
+	#var query_string = _http_helper.query_string_from_dict(fields)
+	var request_data = ""
+	if !fields.empty():
+		request_data = JSON.print(fields)
+	var headers = ["Authorization: Bearer " + access_token, "Content-Type: application/json", "Content-Length: " + str(request_data.length())]
+	var status = request(url, headers, true, method, request_data)
 	if status == OK:
 		_callback = callback
 
