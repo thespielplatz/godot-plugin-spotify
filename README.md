@@ -73,6 +73,8 @@ Check out the playground code
 
 ## Infos
 
+- If you export your project you should move your .json into a TextFile Ressource, because the .json file doesn't show up in the resource folder
+
 - if you messed up alot, clear the token
 ```python
 Spotify.Auth._delete_token(client_id)
