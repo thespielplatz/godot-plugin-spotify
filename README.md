@@ -80,6 +80,7 @@ Check out the playground code
 The Request was a success
 ```python
 signal response_success(data)
+```
 
 There was an error with the underlying http request
 ```python
