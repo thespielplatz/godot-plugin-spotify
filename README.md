@@ -117,7 +117,7 @@ Spotify.Auth._delete_token(client_id)
 - The Plugin is single HTTP based, this means as long as one command is executed, no other can be sent (and will be ignored). You can check the status with:
 ```python
 func _on_GetCurrentTrack_pressed():
-	if not Spotify.is_busy():
+	if !Spotify.is_busy():
 		Spotify.Player.get_current_playing_track()
 ```
 

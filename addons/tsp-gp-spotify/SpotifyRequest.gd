@@ -62,7 +62,16 @@ func _on_request_completed(result, response_code, headers, body):
 	var res = json_result.result
 	
 	if res.has("error"):
-		emit_signal("spotify_error", res.error.status, res.error.message, res.error.reason)
+		var reason = ""
+		var message = ""
+		var status = ""
+		if res.error.has("reason"):
+			reason = res.error.reason
+		if res.error.has("status"):
+			status = res.error.status
+		if res.error.has("message"):
+			message = res.error.message
+		emit_signal("spotify_error", res.error.status, res.error.message, reason)
 		_last_request = null
 		_callback = null
 		return
